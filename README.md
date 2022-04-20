@@ -1,5 +1,5 @@
 # Ocelot
-House price predictions with a machine learning model and all coded using oop
+House price predictions with a machine learning model, all coded using oop
 
 Project to accurately estimate the price of real estate on Barranquilla, Colombia based on given characteristics using a machine learning model and coded using oop
 
