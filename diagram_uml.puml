@@ -1,0 +1,53 @@
+ocelot_uml.puml 
+@startuml 
+
+data <|-- Training_data
+data <|-- Testing_data
+House_data <|-- Prediction_data
+Predictor *---> "Training_data" : Training >
+Predictor *---> "Testing_data" : Testing >
+data "1" *-- "many" House_data : Contains
+data ..> df_data_source
+Prediction_data..> Predictor
+
+class House_data{
+    condition : str
+    property_type : str 
+    neighborhood : str 
+    estrato : int 
+    area : int 
+    bedrooms : int 
+    bathrooms : int 
+    garages : int  
+    price : int
+}
+
+abstract class data{
+    data_list : list[House_data]
+    data_source : pandas.DataFrame
+    + load_data (data_list,data_source) : void
+} 
+
+class df_data_source{
+    data_source : pandas.DataFrame
+}
+
+class Prediction_data{
+}
+
+class Testing_data{
+    testing_data_list : list[House_data]
+}
+
+
+class Training_data{
+    training_data_list : list[House_data]
+}
+
+class Predictor{
+    source_model : sklearn.base.BaseEstimator
+    prediction_data : List[House_data]
+    + get_prediction(prediction_data) : int
+}
+
+@enduml
