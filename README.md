@@ -7,6 +7,6 @@ All the data used to train the model was gathered from real estate sales pages u
 
 It's possible to submit data and receive predictions through the web application.
 
-## Uml class diagram
+## UML Class Diagram
 
 ![uml_diagram](https://github.com/sets018/Ocelot/blob/main/uml_diagram.png)
