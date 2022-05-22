@@ -584,13 +584,13 @@ class Predictor():
 
 
 class model(Predictor):
-    def __init__(self, reg):
+    def __init__(self, fitted_reg):
         super(Predictor, self).__init__()
-        self.reg = reg
+        self.fitted_reg = fitted_reg
 
     def get_predictions(self, y_data):
         self.y_data = y_data
-        self.pred = self.reg.predict(y_data)
+        self.pred = self.fitted_reg.predict(y_data)
         return self.pred
 
 
