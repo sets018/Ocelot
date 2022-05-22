@@ -682,7 +682,7 @@ for column in input_columns_num:
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     pred_encoder = oh_encoder(pred_data.data_source)
-    pred_data_encoded = df_data_source(pred_encoder.encode(), 'input')
+    pred_data_encoded = df_data_source(pred_encoder.encode(), 'input',0.9,0.1)
     prediction = fitted_model.get_predictions(pred_data_encoded)
     st.write("Price : ", prediction)
 
