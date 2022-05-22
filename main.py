@@ -682,7 +682,7 @@ for column in input_columns_cat:
 
 num_input = []
 for column in input_columns_num:
-    usr_input_num = user_input(column, 'slide', df)
+    usr_input_num = user_input(column, 'slider', df)
     num_input.append(usr_input_num)
 
 if st.button('Make Prediction'):
