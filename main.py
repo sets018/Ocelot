@@ -686,3 +686,4 @@ if st.button('Make Prediction'):
     #prediction = fitted_model.get_predictions(pred_data_encoded)
     #st.write("Price : ", prediction)
     st.write("Prediction_data : ", pred_data_encoded)
+    st.write("Prediction_data : ", type(pred_data_encoded))
