@@ -677,13 +677,13 @@ input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 cat_input = []
 for column in input_columns_cat:
-    usr_input = user_input(column, 'radio', df)
-    cat_input.append(usr_input)
+    usr_input_cat = user_input(column, 'radio', df)
+    cat_input.append(usr_input_cat)
 
 num_input = []
 for column in input_columns_num:
-    usr_input = user_input(column, 'slide', df)
-    num_input.append(usr_input)
+    usr_input_num = user_input(column, 'slide', df)
+    num_input.append(usr_input_num)
 
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
