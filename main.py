@@ -471,6 +471,7 @@ class oh_encoder(OneHotEncoder):
         self.dtype = float
         self.drop = None
         self.max_categories = None
+        self.min_frequency = None
 
     def encode(self):
         self.columns_cat = self.data.select_dtypes(include=["object"]).columns
