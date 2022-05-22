@@ -633,13 +633,14 @@ class input():
             self.get_radio()
         elif (self.type == 'slider'):
             self.get_slider()
-        return self.user_input
     def get_radio(self):
         self.user_input = st.radio(
             self.var,
             np.unique(self.data.data_source[self.var]))
+        return self.user_input
     def get_slider(self):
         self.user_input = st.slider(self.var, 0.0, max(self.data.data_source[self.var]), 1.0)
+        return self.user_input
 
 
 
