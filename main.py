@@ -624,7 +624,7 @@ class prediction_data(df_data_source):
         self.pred_data_df_num = pd.DataFrame(self.cat_pred_num, columns=self.num_pred_cols)
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
 
-class input():
+class user_input():
     def __init__(self, var, type, data):
         self.var = var
         self.type = type
@@ -643,7 +643,6 @@ class input():
     def get_slider(self):
         self.user_input = st.slider(self.var, 0.0, max(self.data.data_source[self.var]), 1.0)
         return self.user_input
-
 
 
 df = df_data_source(
@@ -678,13 +677,13 @@ input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 cat_input = []
 for column in input_columns_cat:
-    input = input(column, 'radio', df)
-    cat_input.append(input)
+    usr_input = user_input(column, 'radio', df)
+    cat_input.append(usr_input)
 
 num_input = []
 for column in input_columns_num:
-    input = input(column, 'slide', df)
-    num_input.append(input)
+    usr_input = user_input(column, 'slide', df)
+    num_input.append(usr_input)
 
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
