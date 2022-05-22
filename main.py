@@ -613,15 +613,9 @@ class prediction_data(df_data_source):
         self.cat_pred_cols = cat_pred_cols
         self.num_pred_cols = num_pred_cols
         self.format_data()
-    def load_data(self, cat_pred_data, num_pred_data, cat_pred_cols, num_pred_cols):
-        self.cat_pred_data = cat_pred_data
-        self.num_pred_data = num_pred_data
-        self.cat_pred_cols = cat_pred_cols
-        self.num_pred_cols = num_pred_cols
-        self.format_data()
     def format_data(self):
         self.pred_data_df_cat = pd.DataFrame([self.cat_pred_data],columns = self.cat_pred_cols)
-        self.pred_data_df_num = pd.DataFrame([self.cat_pred_num], columns=self.num_pred_cols)
+        self.pred_data_df_num = pd.DataFrame([self.cat_pred_num], columns = self.num_pred_cols)
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
 
 class user_input():
