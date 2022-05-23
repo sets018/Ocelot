@@ -735,7 +735,7 @@ if st.button('Make Prediction'):
     #st.write("Price : ", prediction)
     st.write("Prediction_data_encoded : ", pred_data.encoded_data)
     st.write("Prediction_data_encoded : ", type(pred_data.encoded_data))
-    shape = pred_data.encoded_data
+    shape = pred_data.encoded_data.shape
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
