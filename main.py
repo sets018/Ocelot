@@ -643,7 +643,7 @@ class prediction_data(df_data_source):
     def get_encoded_pred_data(self,columns_encoded,encoded_data):
         self.columns_encoded = columns_encoded
         self.encoded_data = encoded_data
-        self.data_source = pd.DataFrame(columns = self.full_columns)
+        self.data_source = pd.DataFrame(columns = self.columns_encoded)
         self.add_reg(self.encoded_data)
         self.data_source.fillna(0)
         self.data_source.drop("Price", axis=1, inplace=True)
