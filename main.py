@@ -728,7 +728,7 @@ if st.button('Make Prediction'):
     df.add_reg(pred_data.data_source)
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
-    pred_data.get_encoded_data(df_encoded)
+    pred_data.get_encoded_pred_data(df_encoded)
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
     #prediction = fitted_model.get_predictions(pred_data_encoded)
