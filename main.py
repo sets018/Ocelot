@@ -728,3 +728,4 @@ if st.button('Make Prediction'):
     #st.write("Price : ", prediction)
     st.write("Prediction_data_encoded : ", pred_data_encoded)
     st.write("Prediction_data_encoded : ", type(pred_data_encoded))
+    st.write(pred_data_encoded.shape())
