@@ -667,18 +667,18 @@ fitted_model = model(regressor)
 input_columns_cat = ['condition','estrato','property_type','neighborhood']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
-borough_input = user_input('Borough', 'radio', df)
-st.write("borough: ", borough_input.user_input)
+#borough_input = user_input('Borough', 'radio', df)
+#st.write("borough: ", borough_input.user_input)
 
 cat_input = []
 for column in input_columns_cat:
     usr_input_cat = user_input(column, 'radio', df)
-    cat_input.append(usr_input_cat)
+    cat_input.append(usr_input_cat.user_input)
 
 num_input = []
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df)
-    num_input.append(usr_input_num)
+    num_input.append(usr_input_num.user_input)
     
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
