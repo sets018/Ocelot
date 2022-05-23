@@ -731,8 +731,8 @@ if st.button('Make Prediction'):
     pred_data.get_encoded_pred_data(df_encoded)
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
-    #prediction = fitted_model.get_predictions(pred_data_encoded)
-    #st.write("Price : ", prediction)
+    prediction = fitted_model.get_predictions(pred_data_encoded)
+    st.write("Price : ", prediction)
     st.write("Prediction_data_encoded : ", pred_data.encoded_data)
     st.write("Prediction_data_encoded : ", type(pred_data.encoded_data))
     shape = pred_data.encoded_data.shape
