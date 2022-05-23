@@ -86,8 +86,12 @@ class df_data_source():
     # The dataframe is assigned (=)
     def get_data(self, data_source):
         self.data_source = data_source
-
-
+        
+    def add_reg(self, data_added):
+        self.data_added = data_added
+        self.data_source = pd.concat([self.data_source, data_added], ignore_index = True)
+        self.data_source.reset_index()
+        
 class borough_classifier():
     def make_column_1stone(self):
         self.sectors_column = self.data.data_source.pop('Borough')
@@ -632,7 +636,11 @@ class prediction_data(df_data_source):
         self.pred_data_df_cat = pd.DataFrame([self.cat_pred_data],columns = self.cat_pred_cols)
         self.pred_data_df_num = pd.DataFrame([self.num_pred_data], columns = self.num_pred_cols)
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
-
+    def get_encoded_data(self,data):
+        self.data = data
+        self.encoded_data = data.data_source.iloc[-1:]
+        data.data_source.drop(data.data_source.tail(1).index,inplace=True)
+       
 class user_input():
     def __init__(self, var, type, data, type_data, input_list):
         self.var = var
@@ -671,9 +679,6 @@ df = df_data_source(
     0.9, 0.1)
 sectors = borough_classifier(df)
 sectors.get_sectors()
-
-encoder = oh_encoder(df.data_source)
-df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
 
 st.set_page_config(
     page_title="Ocelot",
@@ -720,15 +725,17 @@ for column in input_columns_num:
     
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
-    pred_encoder = oh_encoder(pred_data.data_source)
-    pred_data_encoded = pred_encoder.encode()
-    #st.write("Pred_data : ", pred_data.data_source)
-    #st.write("Pred_data : ", type(pred_data.data_source))
+    df.add_reg(pred_data.data_source)
+    encoder = oh_encoder(df.data_source)
+    df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
+    pred_data.get_encoded_data(df_encoded.data_source)
+    st.write("Pred_data : ", pred_data.data_source)
+    st.write("Pred_data : ", type(pred_data.data_source))
     #prediction = fitted_model.get_predictions(pred_data_encoded)
     #st.write("Price : ", prediction)
-    st.write("Prediction_data_encoded : ", pred_data_encoded)
-    st.write("Prediction_data_encoded : ", type(pred_data_encoded))
-    shape = pred_data_encoded.shape
+    st.write("Prediction_data_encoded : ", pred_data.encoded_data)
+    st.write("Prediction_data_encoded : ", type(pred_data.encoded_data))
+    shape = pred_data.encoded_data
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
