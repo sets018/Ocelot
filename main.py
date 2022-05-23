@@ -438,17 +438,17 @@ class borough_classifier():
             'Villa Cecilia']
     def get_hoods(self,borough):
         self.borough = borough
-        if (self.borough = 'Riomar'):
+        if (self.borough == 'Riomar'):
             self.hood_list = self.list_riomar
-        elif (self.borough = 'Norte-Centro Histórico'):
+        elif (self.borough == 'Norte-Centro Histórico'):
             self.hood_list = self.list_nch
-        elif (self.borough = 'Metropolitana'):
+        elif (self.borough == 'Metropolitana'):
             self.hood_list = self.list_metr
-        elif (self.borough = 'Sur Occidente'):
+        elif (self.borough == 'Sur Occidente'):
             self.hood_list = self.list_surocc
-        elif (self.borough = 'Sur Oriente'):
+        elif (self.borough == 'Sur Oriente'):
             self.hood_list = self.list_suror
-        elif (self.borough = 'Soledad'):
+        elif (self.borough == 'Soledad'):
             self.hood_list = self.list_sol
 
 
