@@ -674,7 +674,7 @@ encoder = oh_encoder(df.data_source)
 df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
 
 st.set_page_config(
-    page_title="Data Application",
+    page_title="Ocelot",
     layout="centered",
     initial_sidebar_state="auto",
 )
@@ -695,8 +695,6 @@ cat_input = []
 num_input = []
 
 borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list')
-
-st.write(sectors.sectors_values)
 
 sectors.get_hoods(borough_input.user_input)
 hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list')
