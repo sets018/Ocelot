@@ -651,7 +651,7 @@ class user_input():
             self.user_input = st.radio(
                 self.var,
                 np.unique(self.data.data_source[self.var]))
-        elif (self.type == 'list'):
+        elif (self.type_data == 'list'):
             self.user_input = st.radio(
                 self.var,
                 self.data)
@@ -659,7 +659,7 @@ class user_input():
     def get_slider(self):
         if (self.type_data == 'dataframe'):
             self.user_input = st.slider(self.var, 0, max(self.data.data_source[self.var]), 1)
-        elif (self.type == 'list'):
+        elif (self.type_data == 'list'):
             self.user_input = st.slider(self.var, 0, max(self.data), 1)
         st.write(self.var,": ",self.user_input)
 
@@ -698,8 +698,6 @@ borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list')
 
 sectors.get_hoods(borough_input.user_input)
 hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list')
-
-st.write(sectors.hood_list)
 
 input_columns_cat = ['condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
