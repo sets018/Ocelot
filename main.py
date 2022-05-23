@@ -436,6 +436,7 @@ class borough_classifier():
             'Ciudad Caribe',
             'Ciudadela Metropolitan',
             'Villa Cecilia']
+        self.hood_list = []
     def get_hoods(self,borough):
         self.borough = borough
         if (self.borough == 'Riomar'):
