@@ -699,7 +699,7 @@ borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list')
 sectors.get_hoods(borough_input.user_input)
 hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list')
 
-input_columns_cat = ['condition','estrato','property_type','neighborhood']
+input_columns_cat = ['condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 for column in input_columns_cat:
