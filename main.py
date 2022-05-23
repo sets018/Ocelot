@@ -640,6 +640,7 @@ class user_input():
         self.type_data = type_data
         self.get_input()
     def get_input(self):
+        self.user_input = 'placeholder'
         if (self.type == 'radio'):
             self.get_radio()
         elif (self.type == 'slider'):
@@ -656,7 +657,7 @@ class user_input():
         st.write(var,": ",self.user_input)
         cat_input.append(self.user_input)
     def get_slider(self):
-        if (self.type_data == 'datframe'):
+        if (self.type_data == 'dataframe'):
             self.user_input = st.slider(self.var, 0, max(self.data.data_source[self.var]), 1)
         elif (self.type == 'list'):
             self.user_input = st.slider(self.var, 0, max(self.data), 1)
