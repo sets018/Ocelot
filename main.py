@@ -696,21 +696,26 @@ fitted_model = model(regressor)
 cat_input = []
 num_input = []
 
-borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list', cat_input)
+#borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list', cat_input)
 
-sectors.get_hoods(borough_input.user_input)
-hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list', cat_input)
+#sectors.get_hoods(borough_input.user_input)
+#hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list', cat_input)
 
-input_columns_cat = ['condition','estrato','property_type']
+input_columns_cat = ['Borough','Neighborhood','condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 for column in input_columns_cat:
+    if (column == 'Borough'):
+        borough_input = user_input(column, 'radio', sectors.sectors_values, 'list', cat_input)
+        sectors.get_hoods(borough_input.user_input)
+    if (column == 'Neighborhood'):
+        hoods_input = user_input(column, 'radio', sectors.hood_list, 'list', cat_input)
     usr_input_cat = user_input(column, 'radio', df , 'dataframe', cat_input)
-    cat_input.append(usr_input_cat.user_input)
+    #cat_input.append(usr_input_cat.user_input)
     
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
-    num_input.append(usr_input_num.user_input)
+    #num_input.append(usr_input_num.user_input)
     
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
