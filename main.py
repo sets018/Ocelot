@@ -680,7 +680,8 @@ for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df)
     st.write("Usr_input_num: ", usr_input_num )
     num_input.append(usr_input_num)
-
+inpt = st.slider(self.var, 0, max(self.data.data_source[self.'estrato']), 1)
+st.write("inpt : ", inpt)
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     pred_encoder = oh_encoder(pred_data.data_source)
