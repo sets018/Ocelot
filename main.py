@@ -666,22 +666,22 @@ with open("grad_boost_model.bin", 'rb') as model_in:
 
 fitted_model = model(regressor)
 
-input_columns_cat = ['Borough','condition','estrato','property_type','neighborhood']
+input_columns_cat = ['condition','estrato','property_type','neighborhood']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
+
+borough_input = user_input('Borough', 'radio', df)
+st.write("borough: ", borough_input)
 
 cat_input = []
 for column in input_columns_cat:
     usr_input_cat = user_input(column, 'radio', df)
-    st.write("Usr_input_cat: ", usr_input_cat )
     cat_input.append(usr_input_cat)
 
 num_input = []
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df)
-    st.write("Usr_input_num: ", usr_input_num )
     num_input.append(usr_input_num)
-inpt = st.slider('estrato', 0, max(df.data_source['estrato']), 1)
-st.write("inpt : ", inpt)
+    
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     pred_encoder = oh_encoder(pred_data.data_source)
