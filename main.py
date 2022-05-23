@@ -92,6 +92,10 @@ class df_data_source():
         self.data_source = pd.concat([self.data_source, data_added], ignore_index = True)
         self.data_source.reset_index()
         
+    def get_ds_columns(self):
+        self.list_w_columns = list(self.data_source)
+    return self.list_w_columns  
+
 class borough_classifier():
     def make_column_1stone(self):
         self.sectors_column = self.data.data_source.pop('Borough')
@@ -487,7 +491,7 @@ class oh_encoder(OneHotEncoder):
         self.handle_unknown = "ignore"
         self.categories = 'auto'
         self.sparse = False
-        self.dtype = float
+        self.dtype = int
         self.drop = None
         self.max_categories = None
         self.min_frequency = None
@@ -636,11 +640,13 @@ class prediction_data(df_data_source):
         self.pred_data_df_cat = pd.DataFrame([self.cat_pred_data],columns = self.cat_pred_cols)
         self.pred_data_df_num = pd.DataFrame([self.num_pred_data], columns = self.num_pred_cols)
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
-    def get_encoded_pred_data(self,data):
-        self.data = data
-        self.encoded_data = data.data_source.iloc[-1:]
-        data.data_source.drop(data.data_source.tail(1).index,inplace=True)
-       
+    def get_encoded_pred_data(self,columns_encoded,encoded_data):
+        self.columns_encoded = columns_encoded
+        self.encoded_data = encoded_data
+        self.data_source = pd.DataFrame(columns = self.full_columns)
+        self.add_reg(self.encoded_data)
+        self.data_source.fillna(0)
+        self.data_source.drop("Price", axis=1, inplace=True)
 class user_input():
     def __init__(self, var, type, data, type_data, input_list):
         self.var = var
@@ -725,13 +731,15 @@ for column in input_columns_num:
     
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
-    df.add_reg(pred_data.data_source)
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
-    pred_data.get_encoded_pred_data(df_encoded)
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
-    prediction = fitted_model.get_predictions(pred_data.encoded_data)
+    pred_data_encoder = oh_encoder(pred_data.data_source)
+    pred_data_encoded = pred_data_encoder.encode()
+    columns_encoded = df_encoded.get_ds_columns
+    pred_data.get_encoded_pred_data(columns_encoded,pred_data_encoded)
+    prediction = fitted_model.get_predictions(pred_data.data_source)
     st.write("Price : ", prediction)
     st.write("Prediction_data_encoded : ", pred_data.encoded_data)
     st.write("Prediction_data_encoded : ", type(pred_data.encoded_data))
