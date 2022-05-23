@@ -633,10 +633,8 @@ class user_input():
         self.user_input = st.radio(
             self.var,
             np.unique(self.data.data_source[self.var]))
-        return self.user_input
     def get_slider(self):
         self.user_input = st.slider(self.var, 0, max(self.data.data_source[self.var]), 1)
-        return self.user_input
 
 
 df = df_data_source(
@@ -670,7 +668,7 @@ input_columns_cat = ['condition','estrato','property_type','neighborhood']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 borough_input = user_input('Borough', 'radio', df)
-st.write("borough: ", borough_input)
+st.write("borough: ", borough_input.user_input)
 
 cat_input = []
 for column in input_columns_cat:
