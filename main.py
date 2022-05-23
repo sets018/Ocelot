@@ -47,7 +47,7 @@ class df_data_source():
         self.price_subset = self.data_source.iloc[:, -1].values
         self.non_price_subset = self.data_source.iloc[:, :-1].values
         self.data_subset_train, self.data_subset_test, self.price_subset_train, self.price_subset_test = train_test_split(
-            self.non_price_subset, self.price_subset, test_size=self.test_size_, train_size=self.train_size_)
+        self.non_price_subset, self.price_subset, test_size=self.test_size_, train_size=self.train_size_)
         self.price_subset_train = self.price_subset_train.reshape(-1, 1)
         self.price_subset_test = self.price_subset_test.reshape(-1, 1)
 
@@ -636,7 +636,7 @@ class prediction_data(df_data_source):
         self.pred_data_df_cat = pd.DataFrame([self.cat_pred_data],columns = self.cat_pred_cols)
         self.pred_data_df_num = pd.DataFrame([self.num_pred_data], columns = self.num_pred_cols)
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
-    def get_encoded_data(self,data):
+    def get_encoded_pred_data(self,data):
         self.data = data
         self.encoded_data = data.data_source.iloc[-1:]
         data.data_source.drop(data.data_source.tail(1).index,inplace=True)
@@ -728,7 +728,7 @@ if st.button('Make Prediction'):
     df.add_reg(pred_data.data_source)
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
-    pred_data.get_encoded_data(df_encoded.data_source)
+    pred_data.get_encoded_data(df_encoded)
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
     #prediction = fitted_model.get_predictions(pred_data_encoded)
