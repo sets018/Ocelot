@@ -696,8 +696,12 @@ num_input = []
 
 borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list')
 
+st.write(sectors.sectors_values)
+
 sectors.get_hoods(borough_input.user_input)
 hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list')
+
+st.write(sectors.hood_list)
 
 input_columns_cat = ['condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
