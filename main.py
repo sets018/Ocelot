@@ -654,15 +654,14 @@ class user_input():
             self.user_input = st.radio(
                 self.var,
                 self.data)
-        st.write(var,": ",self.user_input)
-        cat_input.append(self.user_input)
+        st.write(self.var,": ",self.user_input)
     def get_slider(self):
         if (self.type_data == 'dataframe'):
             self.user_input = st.slider(self.var, 0, max(self.data.data_source[self.var]), 1)
         elif (self.type == 'list'):
             self.user_input = st.slider(self.var, 0, max(self.data), 1)
-        st.write(var,": ",self.user_input)
-        num_input.append(self.user_input)
+        st.write(self.var,": ",self.user_input)
+
         
 df = df_data_source(
     'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
@@ -704,9 +703,11 @@ input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 for column in input_columns_cat:
     usr_input_cat = user_input(column, 'radio', df , 'dataframe')
-
+    cat_input.append(usr_input_cat.user_input)
+    
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df, 'dataframe')
+    num_input.append(usr_input_num.user_input)
     
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
