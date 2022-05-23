@@ -634,11 +634,12 @@ class prediction_data(df_data_source):
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
 
 class user_input():
-    def __init__(self, var, type, data, type_data):
+    def __init__(self, var, type, data, type_data, input_list):
         self.var = var
         self.type = type
         self.data = data
         self.type_data = type_data
+        self.input_list = input_list
         self.get_input()
     def get_input(self):
         self.user_input = 'placeholder'
@@ -646,6 +647,7 @@ class user_input():
             self.get_radio()
         elif (self.type == 'slider'):
             self.get_slider()
+        self.input_list.append(self.user_input)
     def get_radio(self):
         if (self.type_data == 'dataframe'):
             self.user_input = st.radio(
@@ -694,20 +696,20 @@ fitted_model = model(regressor)
 cat_input = []
 num_input = []
 
-borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list')
+borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list', cat_input)
 
 sectors.get_hoods(borough_input.user_input)
-hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list')
+hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list', cat_input)
 
 input_columns_cat = ['condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 for column in input_columns_cat:
-    usr_input_cat = user_input(column, 'radio', df , 'dataframe')
+    usr_input_cat = user_input(column, 'radio', df , 'dataframe', cat_input)
     cat_input.append(usr_input_cat.user_input)
     
 for column in input_columns_num:
-    usr_input_num = user_input(column, 'slider', df, 'dataframe')
+    usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
     num_input.append(usr_input_num.user_input)
     
 if st.button('Make Prediction'):
