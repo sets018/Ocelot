@@ -436,6 +436,20 @@ class borough_classifier():
             'Ciudad Caribe',
             'Ciudadela Metropolitan',
             'Villa Cecilia']
+    def get_hoods(self,borough):
+        self.borough = borough
+        if (self.borough = 'Riomar'):
+            self.hood_list = self.list_riomar
+        elif (self.borough = 'Norte-Centro Histórico'):
+            self.hood_list = self.list_nch
+        elif (self.borough = 'Metropolitana'):
+            self.hood_list = self.list_metr
+        elif (self.borough = 'Sur Occidente'):
+            self.hood_list = self.list_surocc
+        elif (self.borough = 'Sur Oriente'):
+            self.hood_list = self.list_suror
+        elif (self.borough = 'Soledad'):
+            self.hood_list = self.list_sol
 
 
 class plotting():
@@ -619,10 +633,11 @@ class prediction_data(df_data_source):
         self.data_source = self.pred_data_df_cat.join(self.pred_data_df_num)
 
 class user_input():
-    def __init__(self, var, type, data):
+    def __init__(self, var, type, data, type_data):
         self.var = var
         self.type = type
         self.data = data
+        self.type_data = type_data
         self.get_input()
     def get_input(self):
         if (self.type == 'radio'):
@@ -630,13 +645,24 @@ class user_input():
         elif (self.type == 'slider'):
             self.get_slider()
     def get_radio(self):
-        self.user_input = st.radio(
-            self.var,
-            np.unique(self.data.data_source[self.var]))
+        if (self.type_data == 'dataframe'):
+            self.user_input = st.radio(
+                self.var,
+                np.unique(self.data.data_source[self.var]))
+        elif (self.type == 'list'):
+            self.user_input = st.radio(
+                self.var,
+                self.data)
+        st.write(var,": ",self.user_input)
+        cat_input.append(self.user_input)
     def get_slider(self):
-        self.user_input = st.slider(self.var, 0, max(self.data.data_source[self.var]), 1)
-
-
+        if (self.type_data == 'datframe'):
+            self.user_input = st.slider(self.var, 0, max(self.data.data_source[self.var]), 1)
+        elif (self.type == 'list'):
+            self.user_input = st.slider(self.var, 0, max(self.data), 1)
+        st.write(var,": ",self.user_input)
+        num_input.append(self.user_input)
+        
 df = df_data_source(
     'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
     0.9, 0.1)
@@ -664,21 +690,22 @@ with open("grad_boost_model.bin", 'rb') as model_in:
 
 fitted_model = model(regressor)
 
+cat_input = []
+num_input = []
+
+borough_input = user_input('Borough', 'radio', sectors.sectors_values, 'list')
+
+sectors.get_hoods(borough_input.user_input)
+hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list')
+
 input_columns_cat = ['condition','estrato','property_type','neighborhood']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
-#borough_input = user_input('Borough', 'radio', df)
-#st.write("borough: ", borough_input.user_input)
-
-cat_input = []
 for column in input_columns_cat:
-    usr_input_cat = user_input(column, 'radio', df)
-    cat_input.append(usr_input_cat.user_input)
+    usr_input_cat = user_input(column, 'radio', df , 'dataframe')
 
-num_input = []
 for column in input_columns_num:
-    usr_input_num = user_input(column, 'slider', df)
-    num_input.append(usr_input_num.user_input)
+    usr_input_num = user_input(column, 'slider', df, 'dataframe')
     
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
