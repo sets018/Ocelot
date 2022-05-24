@@ -645,7 +645,7 @@ class prediction_data(df_data_source):
         self.encoded_data = encoded_data
         self.data_source = pd.DataFrame(columns = self.columns_encoded)
         self.add_reg(self.encoded_data)
-        self.data_source.fillna(0)
+        self.data_source = self.data_source.fillna(0)
         self.data_source.drop("Price", axis=1, inplace=True)
 class user_input():
     def __init__(self, var, type, data, type_data, input_list):
