@@ -733,6 +733,7 @@ if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
+    prediction = fitted_model.get_predictions(pred_data.data_source)
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
     pred_data_encoder = oh_encoder(pred_data.data_source)
@@ -746,4 +747,5 @@ if st.button('Make Prediction'):
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
     prediction = fitted_model.get_predictions(pred_data.data_source)
+    st.write(pred_data.data_source.columns)
     st.write("Price : ", prediction)
