@@ -736,6 +736,7 @@ if st.button('Make Prediction'):
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
     pred_data_encoder = oh_encoder(pred_data.data_source)
+    st.write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", type(pred_data.data_source))
     pred_data_encoded = pred_data_encoder.encode()
     columns_encoded = df_encoded.get_ds_columns()
     pred_data.get_encoded_pred_data(columns_encoded,pred_data_encoded)
