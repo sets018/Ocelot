@@ -702,9 +702,9 @@ st.text('Estimate the price of real estate on Barranquilla, Colombia based on gi
 if st.checkbox('Show dataframe'):
     st.dataframe(df.data_source)
 
-regressor = grad_boost.reg
+#regressor = grad_boost.reg
 
-fitted_model = model(regressor)
+#fitted_model = model(regressor)
 
 cat_input = []
 num_input = []
@@ -750,6 +750,6 @@ if st.button('Make Prediction'):
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
-    prediction = fitted_model.get_predictions(pred_data.data_source)
+    #prediction = fitted_model.get_predictions(pred_data.data_source)
     st.write("Price : ", prediction)
     st.write('sklearn: {}'.format(sklearn.__version__))
