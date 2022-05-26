@@ -698,10 +698,6 @@ params = {
 }
 tuner = tuning(grad_boost,"r2",params)
 grad_boost.fit_print_scr()
-
-with open("trained_grad_boost_model.bin", 'wb') as f_out:
-    pickle.dump(grad_boost.reg, f_out) # write final_model in .bin file
-    f_out.close()  # close the file 
     
 df = df_data_source(
     'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
@@ -722,8 +718,7 @@ st.text('Estimate the price of real estate on Barranquilla, Colombia based on gi
 if st.checkbox('Show dataframe'):
     st.dataframe(df.data_source)
 
-with open("trained_grad_boost_model.bin", 'rb') as model_in:
-    regressor = pickle.load(model_in)
+regressor = grad_boost.reg
 
 fitted_model = model(regressor)
 
