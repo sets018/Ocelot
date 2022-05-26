@@ -35,6 +35,6 @@ params = {
 tuner = tuning(grad_boost,"r2",params)
 grad_boost.fit_print_scr()
 
-with open("grad_boost_model.bin", 'wb') as f_out:
+with open("trained_grad_boost_model.bin", 'wb') as f_out:
     pickle.dump(grad_boost.reg, f_out) # write final_model in .bin file
     f_out.close()  # close the file 
