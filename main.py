@@ -683,7 +683,26 @@ class user_input():
             self.user_input = st.slider(self.var, 0, max(self.data), 1)
         st.write(self.var,": ",self.user_input)
 
-        
+df_train = df_data_source('https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv','url',0.9,0.1)
+sectors = borough_classifier(df_train)
+sectors.get_sectors()
+
+encoder = oh_encoder(df_train.data_source)
+df_encoded_train = df_data_source(encoder.encode(),'pass',0.9,0.1)
+
+grad_boost = Predictor('gradient_boosting',df_encoded_train,0.7,0.3)
+params = {
+    "model__regressor__n_estimators": [300],
+    "model__regressor__max_depth": [5],
+    "model__regressor__learning_rate": [0.1],
+}
+tuner = tuning(grad_boost,"r2",params)
+grad_boost.fit_print_scr()
+
+with open("trained_grad_boost_model.bin", 'wb') as f_out:
+    pickle.dump(grad_boost.reg, f_out) # write final_model in .bin file
+    f_out.close()  # close the file 
+    
 df = df_data_source(
     'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
     0.9, 0.1)
@@ -703,7 +722,7 @@ st.text('Estimate the price of real estate on Barranquilla, Colombia based on gi
 if st.checkbox('Show dataframe'):
     st.dataframe(df.data_source)
 
-with open("grad_boost_model.bin", 'rb') as model_in:
+with open("trained_grad_boost_model.bin", 'rb') as model_in:
     regressor = pickle.load(model_in)
 
 fitted_model = model(regressor)
