@@ -752,3 +752,5 @@ if st.button('Make Prediction'):
     #prediction = fitted_model.get_predictions(pred_data.data_source)
     #st.write("Price : ", prediction)
     st.write(sklearn.__version__)
+    import platform
+    st.write(platform.python_version())
