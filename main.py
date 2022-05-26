@@ -650,7 +650,7 @@ class prediction_data(df_data_source):
     def fix_columns(self, hood):
         self.hood = hood
         self.data_source['n_'+self.hood] = self.data_source['N_'+self.hood]
-        self.drop_column(self, 'N_'+self.hood)
+        self.drop_column('N_'+self.hood)
 class user_input():
     def __init__(self, var, type, data, type_data, input_list):
         self.var = var
