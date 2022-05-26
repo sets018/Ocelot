@@ -683,6 +683,12 @@ class user_input():
             self.user_input = st.slider(self.var, 0, max(self.data), 1)
         st.write(self.var,": ",self.user_input)
 
+df = df_data_source(
+    'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
+    0.9, 0.1)
+sectors = borough_classifier(df)
+sectors.get_sectors()
+
 encoder_train = oh_encoder(df.data_source)
 df_encoded_train = df_data_source(encoder_train.encode(),'pass',0.9,0.1)
 
@@ -695,12 +701,6 @@ params = {
 tuner = tuning(grad_boost,"r2",params)
 grad_boost.fit_print_scr()
     
-df = df_data_source(
-    'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
-    0.9, 0.1)
-sectors = borough_classifier(df)
-sectors.get_sectors()
-
 st.set_page_config(
     page_title="Ocelot",
     layout="centered",
