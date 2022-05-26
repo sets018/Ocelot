@@ -747,7 +747,7 @@ if st.button('Make Prediction'):
     st.write("Prediction_data_encoded : ", type(pred_data.data_source))
     st.write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", pred_data.data_source.columns)
     st.write("aaaaaaaaaaa: ", pred_data.data_source["n_Paraíso"])
-    pred_data.fix_columns(self, hoods_input.user_input)
+    pred_data.fix_columns(hoods_input.user_input)
     shape = pred_data.data_source.shape
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
