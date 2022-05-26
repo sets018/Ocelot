@@ -688,18 +688,6 @@ df = df_data_source(
     0.9, 0.1)
 sectors = borough_classifier(df)
 sectors.get_sectors()
-
-encoder_train = oh_encoder(df.data_source)
-df_encoded_train = df_data_source(encoder_train.encode(),'pass',0.9,0.1)
-
-grad_boost = Predictor('gradient_boosting',df_encoded_train)
-params = {
-    "model__regressor__n_estimators": [300],
-    "model__regressor__max_depth": [5],
-    "model__regressor__learning_rate": [0.1],
-}
-tuner = tuning(grad_boost,"r2",params)
-grad_boost.fit_print_scr()
     
 st.set_page_config(
     page_title="Ocelot",
@@ -764,3 +752,4 @@ if st.button('Make Prediction'):
     st.write('\nNumber of columns :', shape[1])
     prediction = fitted_model.get_predictions(pred_data.data_source)
     st.write("Price : ", prediction)
+    st.write('sklearn: {}'.format(sklearn.__version__))
