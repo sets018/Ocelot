@@ -647,6 +647,10 @@ class prediction_data(df_data_source):
         self.add_reg(self.encoded_data)
         self.data_source = self.data_source.fillna(0)
         self.data_source.drop("Price", axis=1, inplace=True)
+    def fix_columns(self, hood):
+        self.hood = hood
+        self.data_source['n_'+self.hood] = self.data_source['N_'+self.hood]
+        self.drop_column(self, 'N_'+self.hood)
 class user_input():
     def __init__(self, var, type, data, type_data, input_list):
         self.var = var
@@ -743,6 +747,7 @@ if st.button('Make Prediction'):
     st.write("Prediction_data_encoded : ", type(pred_data.data_source))
     st.write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", pred_data.data_source.columns)
     st.write("aaaaaaaaaaa: ", pred_data.data_source["n_Paraíso"])
+    pred_data.fix_columns(self, hoods_input.user_input)
     shape = pred_data.data_source.shape
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
