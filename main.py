@@ -20,7 +20,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 import pickle
-
+import sklearn
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
@@ -752,4 +752,4 @@ if st.button('Make Prediction'):
     st.write('\nNumber of columns :', shape[1])
     #prediction = fitted_model.get_predictions(pred_data.data_source)
     #st.write("Price : ", prediction)
-    st.write('sklearn: {}'.format(sklearn.__version__))
+    st.write(sklearn.__version__)
