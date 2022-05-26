@@ -747,5 +747,4 @@ if st.button('Make Prediction'):
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
     prediction = fitted_model.get_predictions(pred_data.data_source)
-    st.write(pred_data.data_source.columns)
     st.write("Price : ", prediction)
