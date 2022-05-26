@@ -690,7 +690,7 @@ sectors.get_sectors()
 encoder = oh_encoder(df_train.data_source)
 df_encoded_train = df_data_source(encoder.encode(),'pass',0.9,0.1)
 
-grad_boost = Predictor('gradient_boosting',df_encoded_train,0.7,0.3)
+grad_boost = Predictor('gradient_boosting',df_encoded_train)
 params = {
     "model__regressor__n_estimators": [300],
     "model__regressor__max_depth": [5],
