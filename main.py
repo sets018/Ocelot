@@ -684,7 +684,7 @@ class user_input():
         st.write(self.var,": ",self.user_input)
 
 encoder_train = oh_encoder(df.data_source)
-df_encoded_train = df_data_source(encoder.encode(),'pass',0.9,0.1)
+df_encoded_train = df_data_source(encoder_train.encode(),'pass',0.9,0.1)
 
 grad_boost = Predictor('gradient_boosting',df_encoded_train)
 params = {
