@@ -575,8 +575,8 @@ class Predictor():
         # self.model.fit(self.x_train,self.y_train)
         # print('Training score : ',self.reg.score(self.x_train,self.y_train))
         # print('Real score : ',self.reg.score(self.x_test,self.y_test))
-        self.preds = self.reg.predict(self.x_test)
-        self.r2, self.MAE, self.MSE = self.get_scores(self.preds, self.y_test)
+        #self.preds = self.reg.predict(self.x_test)
+        #self.r2, self.MAE, self.MSE = self.get_scores(self.preds, self.y_test)
         #print('MAE : ', self.MAE)
         #print('MSE : ', self.MSE)
         #print('r2 : ', self.r2)
@@ -610,13 +610,11 @@ class model(Predictor):
     def __init__(self, fitted_reg):
         super(Predictor, self).__init__()
         self.fitted_reg = fitted_reg
-
     def get_predictions(self, y_data):
         self.y_data = y_data
         self.pred = self.fitted_reg.predict(y_data)
         return self.pred
-
-
+    
 class tuning():
     def __init__(self, predictor, scoring, params):
         self.predictor = predictor
@@ -726,7 +724,8 @@ for column in input_columns_cat:
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
     #num_input.append(usr_input_num.user_input)
-    
+
+got_model = 0
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     encoder = oh_encoder(df.data_source)
@@ -746,11 +745,16 @@ if st.button('Make Prediction'):
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
-    with open("trained_grad_boost_model.bin", 'rb') as f_in:
-        regressor = pickle.load(f_in) 
-        fitted_model = model(regressor)
-    #prediction = fitted_model.get_predictions(pred_data.data_source)
-    #st.write("Price : ", prediction)
-    st.write(sklearn.__version__)
-    import platform
-    st.write(platform.python_version())
+    if (got_model == 0):
+         grad_boost = Predictor('gradient_boosting',df_encoded,0.9,0.1)
+         params = {
+            "model__regressor__n_estimators": [300],
+            "model__regressor__max_depth": [5],
+            "model__regressor__learning_rate": [0.1],
+            }
+        tuner = tuning(grad_boost,"r2",params)
+        grad_boost.fit_print_scr()
+        fitted_model = model(grad_boost.reg)
+        got_model = 1
+    prediction = fitted_model.get_predictions(pred_data.data_source)
+    st.write("Price : ", prediction)
