@@ -649,6 +649,8 @@ class prediction_data(df_data_source):
         self.hood = hood
         self.data_source['n_'+self.hood] = self.data_source['N_'+self.hood]
         self.drop_column('N_'+self.hood)
+        st.write('n_'+self.hood)
+        st.write('N_'+self.hood)
 class user_input():
     def __init__(self, var, type, data, type_data, input_list):
         self.var = var
