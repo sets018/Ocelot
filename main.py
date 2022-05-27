@@ -746,8 +746,8 @@ if st.button('Make Prediction'):
     st.write('\nNumber of rows :', shape[0])
     st.write('\nNumber of columns :', shape[1])
     if (got_model == 0):
-         grad_boost = Predictor('gradient_boosting',df_encoded,0.9,0.1)
-         params = {
+        grad_boost = Predictor('gradient_boosting',df_encoded,0.9,0.1)
+        params = {
             "model__regressor__n_estimators": [300],
             "model__regressor__max_depth": [5],
             "model__regressor__learning_rate": [0.1],
