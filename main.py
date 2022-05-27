@@ -738,11 +738,11 @@ if st.button('Make Prediction'):
     pred_data_encoded = pred_data_encoder.encode()
     columns_encoded = df_encoded.get_ds_columns()
     pred_data.get_encoded_pred_data(columns_encoded,pred_data_encoded)
+    pred_data.fix_columns(hoods_input.user_input)
     st.write("Prediction_data_encoded : ", pred_data.data_source)
     st.write("Prediction_data_encoded : ", type(pred_data.data_source))
     st.write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", pred_data.data_source.columns)
     st.write("aaaaaaaaaaa: ", pred_data.data_source["n_Paraíso"])
-    pred_data.fix_columns(hoods_input.user_input)
     shape = pred_data.data_source.shape
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
