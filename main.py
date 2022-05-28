@@ -730,7 +730,7 @@ if st.button('Make Prediction'):
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
     st.write("Pred_data : ", pred_data.data_source)
     st.write("Pred_data : ", type(pred_data.data_source))
-    st.write(pred_data["Neighborhood"].unique)
+    st.write(pred_data.data_source["Neighborhood"].unique)
     pred_data_encoder = oh_encoder(pred_data.data_source)
     pred_data_encoded = pred_data_encoder.encode()
     columns_encoded = df_encoded.get_ds_columns()
