@@ -115,8 +115,7 @@ class borough_classifier():
 
     def __init__(self, data):
         self.data = data
-        self.list_riomar = ['Adela de Char',
-                            'Adelita de Char Etp 2',
+        self.list_riomar = ['Adela de Char Etp. 1',
                             'Adelita de Char Etp. 3',
                             'Adelita de Char Etp. 2',
                             'Altamira',
@@ -134,7 +133,6 @@ class borough_classifier():
                             'La Floresta',
                             'Las Flores',
                             'Las Tres Avemarías',
-                            'Miramar',
                             'Paraíso',
                             'Riomar',
                             'San Marino',
@@ -153,6 +151,7 @@ class borough_classifier():
                             'Puerto Colombia',
                             'Villas del Puerto']
         self.list_nch = [
+            'Alameda del Rio',
             'América',
             'Barlovento',
             'Barranquillita',
@@ -196,13 +195,10 @@ class borough_classifier():
             'Villa Country',
             'Villa Tarel',
             'Norte-Centro Histórico',
-            'Alameda del Rio',
             'Barranquilla',
             'Villanueva']
         self.list_metr = [
             '7 de Abril',
-            '7 de Abril.',
-            '20 de Julio',
             'Buenos Aires',
             'Carrizal',
             'Cevillar',
@@ -684,7 +680,7 @@ class user_input():
         st.write(self.var,": ",self.user_input)
 
 df = df_data_source(
-    'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_clean_final.csv', 'url',
+    'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_final.csv', 'url',
     0.9, 0.1)
 sectors = borough_classifier(df)
 sectors.get_sectors()
