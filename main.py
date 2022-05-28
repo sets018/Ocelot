@@ -318,7 +318,7 @@ class borough_classifier():
             'Villa del Carmen',
             'Zona Franca']
         self.list_sol = [
-            'soledad',
+            'Soledad',
             '12 de octubre',
             'El Parque',
             'Las Gaviotas',
