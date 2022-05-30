@@ -91,7 +91,7 @@ class df_data_source():
         
     def add_reg(self, data_added):
         self.data_added = data_added
-        self.data_source = pd.concat([self.data_source, data_added], sort=False).reset_index(drop = True) )
+        self.data_source = pd.concat([self.data_source, data_added], sort=False).reset_index(drop = True)
         #self.data_source.reset_index()
         
     def get_ds_columns(self):
