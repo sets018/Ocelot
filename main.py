@@ -465,7 +465,7 @@ class plotting():
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(10, 4))
         sns.distplot(self.data.data_source[self.y_column], color = 'r')
-        plt.yscale('log')
+        plt.xscale('log')
         plt.xlabel('Sale Price', fontsize = 16)
         plt.ylabel('Frequency', fontsize = 16)
         plt.title('Sale Price Distribution', fontsize = 22)
@@ -724,6 +724,7 @@ for column in input_columns_num:
     #num_input.append(usr_input_num.user_input)
 price_plot = plotting(df)
 price_plot.dist('Price')
+scat_plot = scatter('Area')
 got_model = 0
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
