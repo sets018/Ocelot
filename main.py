@@ -462,7 +462,7 @@ class plotting():
     def dist(self, y_column):
         self.y_column = y_column
         sns.set_style('whitegrid')
-        self.fig = sns.distplot(self.y_column)
+        self.fig = sns.distplot(self.data.data_source[self.y_column])
         self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
