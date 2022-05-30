@@ -466,18 +466,18 @@ class plotting():
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(10, 4))
         sns.distplot(self.data.data_source[self.y_column], color = 'r')
-        plt.xscale('log')
         plt.xlabel('Sale Price', fontsize = 16)
         plt.ylabel('Frequency', fontsize = 16)
         plt.title('Sale Price Distribution', fontsize = 22)
         self.show_plot()
     def scatter(self,var):
         self.var = var
-        #self.plotting_data = self.data.data_source.drop('Price', axis = 1)
         self.fig = px.scatter(self.data.data_source,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=True)
     def corr(self):
+        self.fig = plt.figure(figsize=(10, 4))
         sns.heatmap(df.data_source.corr(), annot = True, cmap = 'magma')
+        plt.title('Correlation', fontsize = 22)
         self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
