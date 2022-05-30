@@ -736,7 +736,7 @@ if st.button('Make Prediction'):
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
     st.write("Raw_Pred_data : ", pred_data.data_source)
-    st.write(pred_data.data_source["Neighborhood"].unique())
+    st.write(pred_data.data_source["neighborhood"].unique())
     pred_data_encoder = oh_encoder(pred_data.data_source)
     pred_data_encoded = pred_data_encoder.encode()
     st.write("Encoded_Pred_data : ", pred_data_encoded)
