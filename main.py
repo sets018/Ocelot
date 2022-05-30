@@ -21,7 +21,6 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 import pickle
 import sklearn
-import plotly as plt
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
@@ -456,28 +455,17 @@ class borough_classifier():
             self.hood_list = self.list_suror
         elif (self.borough == 'Soledad'):
             self.hood_list = self.list_sol
-
-
+            
 class plotting():
     def __init__(self, data):
         self.data = data
-
-    def plot_distr(self, x_column):
-        self.x_column = x_column
-        self.x_data = self.data[x_column]
-        sns.displot(self.x_data)
-
-    def plot_corr(self):
-        sns.heatmap(self.data.corr())
-
-    def plot_histo(self):
-        self.y_data = self.data['Price']
-        self.variables = ['estrato', 'property_type', 'neighborhood', 'Area', 'bedrooms', 'bathrooms', 'garages']
-        for self.i in self.variables:
-            self.x_column = self.data[self.i]
-            sns.jointplot(x=self.x_column, y=self.y_data, data=self.data)
-
-
+    def dist(self, y_column):
+        self.y_column = y_column
+        sns.set_style('whitegrid')
+        self.fig = sns.distplot(self.y_column)
+        self.show_plot()
+    def show_plot(self):
+        st.pyplot(self.fig)
 class oh_encoder(OneHotEncoder):
     def __init__(self, data):
         super(OneHotEncoder, self).__init__()
@@ -723,7 +711,8 @@ for column in input_columns_cat:
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
     #num_input.append(usr_input_num.user_input)
-
+price_plot = plotting()
+price_plot.dist(')
 got_model = 0
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
