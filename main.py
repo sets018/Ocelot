@@ -446,17 +446,17 @@ class borough_classifier():
     def get_hoods(self,borough):
         self.borough = borough
         if (self.borough == 'Riomar'):
-            self.hood_list = self.list_riomar
+            self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Riomar']["neighborhood"].unique().tolist()
         elif (self.borough == 'Norte-Centro Histórico'):
-            self.hood_list = self.list_nch
+            self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Norte-Centro Histórico']["neighborhood"].unique().tolist()
         elif (self.borough == 'Metropolitana'):
-            self.hood_list = self.list_metr
+            self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Metropolitana']["neighborhood"].unique().tolist()
         elif (self.borough == 'Sur Occidente'):
-            self.hood_list = self.list_surocc
+            self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Sur Occidente']["neighborhood"].unique().tolist()
         elif (self.borough == 'Sur Oriente'):
-            self.hood_list = self.list_suror
+            self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Sur Oriente']["neighborhood"].unique().tolist()
         elif (self.borough == 'Soledad'):
-            self.hood_list = self.list_sol
+            self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Soledad']["neighborhood"].unique().tolist()
             
 class plotting():
     def __init__(self, data):
