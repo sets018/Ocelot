@@ -21,7 +21,6 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 import pickle
 import sklearn
-import pyplot
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
@@ -463,7 +462,8 @@ class plotting():
     def dist(self, y_column):
         self.y_column = y_column
         sns.set_style('whitegrid')
-        self.fig = sns.distplot(self.data.data_source[self.y_column])
+        self.fig = plt.figure(figsize=(10, 4))
+        sns.distplot(self.data.data_source[self.y_column])
         self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
