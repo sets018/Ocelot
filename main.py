@@ -755,4 +755,4 @@ if st.button('Make Prediction'):
         got_model = 1
     prediction = fitted_model.get_predictions(pred_data.data_source)
     est_price = prediction[0]
-    st.write("Estimated price : ", est_price)
+    st.write("Estimated price : ", int(est_price))
