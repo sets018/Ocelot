@@ -91,8 +91,8 @@ class df_data_source():
         
     def add_reg(self, data_added):
         self.data_added = data_added
-        self.data_source = pd.concat([self.data_source, data_added], ignore_index = True)
-        self.data_source.reset_index()
+        self.data_source = pd.concat([self.data_source, data_added], sort=False).reset_index(drop = True) )
+        #self.data_source.reset_index()
         
     def get_ds_columns(self):
         self.list_w_columns = list(self.data_source)
@@ -735,18 +735,16 @@ if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
-    st.write("Pred_data : ", pred_data.data_source)
-    st.write("Pred_data : ", type(pred_data.data_source))
+    st.write("Raw_Pred_data : ", pred_data.data_source)
     st.write(pred_data.data_source["Neighborhood"].unique())
     pred_data_encoder = oh_encoder(pred_data.data_source)
     pred_data_encoded = pred_data_encoder.encode()
+    st.write("Encoded_Pred_data : ", pred_data_encoded)
     columns_encoded = df_encoded.get_ds_columns()
+    st.write("Columns encoded : ", columns_encoded)
     pred_data.get_encoded_pred_data(columns_encoded,pred_data_encoded)
+    st.write("Fixed_Pred_data : ", pred_data.data_source)
     pred_data.fix_columns(hoods_input.user_input)
-    st.write("Prediction_data_encoded : ", pred_data.data_source)
-    st.write("Prediction_data_encoded : ", type(pred_data.data_source))
-    st.write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", pred_data.data_source.columns)
-    st.write("aaaaaaaaaaa: ", pred_data.data_source["n_Paraíso"])
     shape = pred_data.data_source.shape
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
