@@ -21,7 +21,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 import pickle
 import sklearn
-import plotly.figure_factory as ff
+from plotly.tools import FigureFactory as ff
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
