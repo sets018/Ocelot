@@ -722,9 +722,9 @@ for column in input_columns_cat:
 for column in input_columns_num:
     usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
     #num_input.append(usr_input_num.user_input)
-price_plot = plotting(df)
-price_plot.dist('Price')
-scat_plot = scatter('Area')
+price_plots = plotting(df)
+price_plots.dist('Price')
+price_plots.scatter('Area')
 got_model = 0
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
