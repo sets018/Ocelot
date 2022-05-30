@@ -710,14 +710,14 @@ num_input = []
 #sectors.get_hoods(borough_input.user_input)
 #hoods_input = user_input('Neighborhood', 'radio', sectors.hood_list, 'list', cat_input)
 
-input_columns_cat = ['Borough','Neighborhood','condition','estrato','property_type']
+input_columns_cat = ['Borough','neighborhood','condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
 for column in input_columns_cat:
     if (column == 'Borough'):
         borough_input = user_input(column, 'radio', sectors.sectors_values, 'list', cat_input)
         sectors.get_hoods(borough_input.user_input)
-    elif (column == 'Neighborhood'):
+    elif (column == 'neighborhood'):
         hoods_input = user_input(column, 'radio', sectors.hood_list, 'list', cat_input)
     else:
         usr_input_cat = user_input(column, 'radio', df , 'dataframe', cat_input)
@@ -744,7 +744,7 @@ if st.button('Make Prediction'):
     st.write("Columns encoded : ", columns_encoded)
     pred_data.get_encoded_pred_data(columns_encoded,pred_data_encoded)
     st.write("Fixed_Pred_data : ", pred_data.data_source)
-    pred_data.fix_columns(hoods_input.user_input)
+    #pred_data.fix_columns(hoods_input.user_input)
     shape = pred_data.data_source.shape
     st.write('\nDataFrame Shape :', shape)
     st.write('\nNumber of rows :', shape[0])
