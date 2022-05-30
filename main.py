@@ -736,19 +736,12 @@ if st.button('Make Prediction'):
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
     st.write("Raw_Pred_data : ", pred_data.data_source)
-    st.write(pred_data.data_source["neighborhood"].unique())
     pred_data_encoder = oh_encoder(pred_data.data_source)
     pred_data_encoded = pred_data_encoder.encode()
-    st.write("Encoded_Pred_data : ", pred_data_encoded)
     columns_encoded = df_encoded.get_ds_columns()
-    st.write("Columns encoded : ", columns_encoded)
     pred_data.get_encoded_pred_data(columns_encoded,pred_data_encoded)
-    st.write("Fixed_Pred_data : ", pred_data.data_source)
     #pred_data.fix_columns(hoods_input.user_input)
     shape = pred_data.data_source.shape
-    st.write('\nDataFrame Shape :', shape)
-    st.write('\nNumber of rows :', shape[0])
-    st.write('\nNumber of columns :', shape[1])
     if (got_model == 0):
         grad_boost = Predictor('gradient_boosting',df_encoded)
         params = {
@@ -761,4 +754,4 @@ if st.button('Make Prediction'):
         fitted_model = model(grad_boost.reg)
         got_model = 1
     prediction = fitted_model.get_predictions(pred_data.data_source)
-    st.write("Price : ", prediction)
+    st.write("Price : ", prediction[prediction[0] = 0)
