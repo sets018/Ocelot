@@ -461,26 +461,30 @@ class borough_classifier():
 class plotting():
     def __init__(self, data):
         self.data = data
+        self.plot_data = df_data_source(self.data.data_source, 'pass', 0.9, 0.1)
+        self.prepare_data()
     def dist(self, y_column):
         self.y_column = y_column
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(10, 4))
-        sns.distplot(self.data.data_source[self.y_column], color = 'r')
+        sns.distplot(self.plot_data.data_source[self.y_column], color = 'r')
         plt.xlabel('Sale Price', fontsize = 16)
         plt.ylabel('Frequency', fontsize = 16)
         plt.title('Sale Price Distribution', fontsize = 22)
         self.show_plot()
     def scatter(self,var):
         self.var = var
-        self.fig = px.scatter(self.data.data_source,x=self.var, y='Price', color='Borough')
+        self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=True)
     def corr(self):
         self.fig = plt.figure(figsize=(10, 4))
-        sns.heatmap(df.data_source.corr(), annot = True, cmap = 'magma')
+        sns.heatmap(self.plot_data.data_source.corr(), annot = True, cmap = 'magma')
         plt.title('Correlation', fontsize = 22)
         self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
+    def prepare_data(self):
+        self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 1000000
 class oh_encoder(OneHotEncoder):
     def __init__(self, data):
         super(OneHotEncoder, self).__init__()
