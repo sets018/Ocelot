@@ -472,7 +472,7 @@ class plotting():
         self.show_plot()
     def scatter(self,var):
         self.var = var
-        self.plotting_data = data.data_source.drop('Price', axis = 1)
+        self.plotting_data = self.data.data_source.drop('Price', axis = 1)
         self.fig = ff.scatter(self.plotting_data,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=True)
     def show_plot(self):
