@@ -463,7 +463,7 @@ class plotting():
         self.y_column = y_column
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(10, 4))
-        sns.distplot(self.data.data_source[self.y_column])
+        sns.distplot(np.log(self.data.data_source[self.y_column]))
         self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
