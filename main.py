@@ -21,6 +21,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 import pickle
 import sklearn
+import plotly.figure_factory as ff
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
@@ -463,8 +464,17 @@ class plotting():
         self.y_column = y_column
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(10, 4))
-        sns.distplot(np.log(self.data.data_source[self.y_column]))
+        sns.distplot(self.data.data_source[self.y_column], color = 'r')
+        plt.yscale('log')
+        plt.xlabel('Sale Price', fontsize = 16)
+        plt.ylabel('Frequency', fontsize = 16)
+        plt.title('Sale Price Distribution', fontsize = 22)
         self.show_plot()
+    def scatter(self,var):
+        self.var = var
+        self.plotting_data = data.data_source.drop('Price', axis = 1)
+        self.fig = ff.scatter(self.plotting_data,x=self.var, y='Price', color='Borough')
+        st.plotly_chart(self.fig, use_container_width=True)
     def show_plot(self):
         st.pyplot(self.fig)
 class oh_encoder(OneHotEncoder):
