@@ -22,6 +22,7 @@ import streamlit as st
 import pickle
 import sklearn
 from plotly.tools import FigureFactory as ff
+import plotly.express as px
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
@@ -473,8 +474,11 @@ class plotting():
     def scatter(self,var):
         self.var = var
         self.plotting_data = self.data.data_source.drop('Price', axis = 1)
-        self.fig = ff.scatter(self.plotting_data,x=self.var, y='Price', color='Borough')
+        self.fig = px.scatter(self.plotting_data,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=True)
+    def corr(self):
+        sns.heatmap(df.data_source.corr(), annot = True, cmap = 'magma')
+        self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
 class oh_encoder(OneHotEncoder):
@@ -725,6 +729,7 @@ for column in input_columns_num:
 price_plots = plotting(df)
 price_plots.dist('Price')
 price_plots.scatter('Area')
+price_plots.corr()
 got_model = 0
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
