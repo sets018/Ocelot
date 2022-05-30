@@ -755,4 +755,4 @@ if st.button('Make Prediction'):
         got_model = 1
     prediction = fitted_model.get_predictions(pred_data.data_source)
     st.write("Price : ", prediction)
-    st.write(prediction.at[0, 0])
+    st.write(prediction.at[0, "0"])
