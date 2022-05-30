@@ -754,5 +754,4 @@ if st.button('Make Prediction'):
         fitted_model = model(grad_boost.reg)
         got_model = 1
     prediction = fitted_model.get_predictions(pred_data.data_source)
-    st.write("Price : ", prediction)
-    st.write(prediction.at[0, "0"])
+    st.write("Estimated price : ", prediction[0])
