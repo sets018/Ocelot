@@ -473,8 +473,8 @@ class plotting():
         self.show_plot()
     def scatter(self,var):
         self.var = var
-        self.plotting_data = self.data.data_source.drop('Price', axis = 1)
-        self.fig = px.scatter(self.plotting_data,x=self.var, y='Price', color='Borough')
+        #self.plotting_data = self.data.data_source.drop('Price', axis = 1)
+        self.fig = px.scatter(self.data.data_source,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=True)
     def corr(self):
         sns.heatmap(df.data_source.corr(), annot = True, cmap = 'magma')
