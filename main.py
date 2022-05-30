@@ -459,6 +459,7 @@ class borough_classifier():
             self.hood_list = self.data.data_source[df.data_source["Borough"] == 'Soledad']["neighborhood"].unique().tolist()
             
 class plotting():
+    def __init__(self, data):
         self.plot_data = df_data_source('https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_final.csv', 'url',0.9, 0.1)
         self.prepare_data()
     def dist(self, y_column):
