@@ -707,9 +707,13 @@ st.set_page_config(
 )
 
 st.title('Ocelot')
-st.subheader('House price predictions from a machine learning model, all coded using oop')
-st.text('Estimate the price of real estate on Barranquilla, Colombia based on given characteristics')
+st.subheader('House price predictions from a machine learning model')
+st.subheader('Coded with oop')
+st.text('Estimate the price of real estate on Barranquilla, Colombia')
+st.write("""## How it works""")
+st.write("Get your estimation by using the button at the top left side of the screen to enter the data of the property (Area,Neighborhood,Bedrooms, etc) . This will give you a 'predicted sale price' based on your selections.")
 
+st.write("""## The data being used""")
 if st.checkbox('Show dataframe'):
     st.dataframe(df.data_source)
 
