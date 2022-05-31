@@ -465,9 +465,9 @@ class plotting():
     def dist(self, y_column):
         self.y_column = y_column
         sns.set_style('whitegrid')
-        self.fig = plt.figure(figsize=(10, 4))
-        sns.distplot(self.plot_data.data_source[self.y_column], color = 'r')
-        plt.xlabel('Sale Price', fontsize = 16)
+        self.fig = plt.figure(figsize=(15, 20))
+        sns.distplot(np.log(self.plot_data.data_source[self.y_column]), color = 'r')
+        plt.xlabel('log(Sale Price)', fontsize = 16)
         plt.ylabel('Frequency', fontsize = 16)
         plt.title('Sale Price Distribution', fontsize = 22)
         self.show_plot()
@@ -476,14 +476,13 @@ class plotting():
         self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=True)
     def corr(self):
-        self.fig = plt.figure(figsize=(10, 4))
+        self.fig = plt.figure(figsize=(15, 15))
         sns.heatmap(self.plot_data.data_source.corr(), annot = True, cmap = 'magma')
-        plt.title('Correlation', fontsize = 22)
         self.show_plot()
     def show_plot(self):
         st.pyplot(self.fig)
     def prepare_data(self):
-        self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 100000000
+        #self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 100000000
 class oh_encoder(OneHotEncoder):
     def __init__(self, data):
         super(OneHotEncoder, self).__init__()
