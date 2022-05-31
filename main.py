@@ -475,7 +475,8 @@ class plotting():
         self.var = var
         #self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
         #st.plotly_chart(self.fig, use_container_width=True)
-        self.fig = sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
+        self.fig = plt.figure(figsize=(24,20))
+        sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
         plt.title('Area / Sale Price', fontsize = 16)
         plt.xlabel('Area', fontsize = 14)
         plt.ylabel('Sale Price', fontsize = 14)
