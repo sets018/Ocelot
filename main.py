@@ -724,9 +724,7 @@ num_input = []
 input_columns_cat = ['Borough','neighborhood','condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
-input_columns_cat = ['Borough','neighborhood','condition','estrato','property_type']
-input_columns_num = ['Area','bedrooms','bathrooms','garages']
-with st.siderbar:
+with st.sidebar:
     for column in input_columns_cat:
         if (column == 'Borough'):
             borough_input = user_input(column, 'radio', sectors.sectors_values, 'list', cat_input)
