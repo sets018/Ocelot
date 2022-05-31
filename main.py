@@ -709,8 +709,8 @@ st.set_page_config(
 st.title('Ocelot')
 logo = Image.open('Ocelot_logo.jpeg')
 st.image(logo)
-st.subheader('House price predictions from a machine learning model')
 st.subheader('Estimate the price of real estate in Barranquilla, Colombia')
+st.write('House price predictions from a machine learning model')
 st.write("""## How it works""")
 st.write("Get your estimation by using the button at the top left side of the screen to enter the data of the property (Area,Neighborhood,Bedrooms, etc) . This will give you a 'predicted sale price' based on your selections.")
 
