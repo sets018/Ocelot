@@ -468,8 +468,9 @@ class plotting():
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(24,20))
         sns.distplot(self.plot_data.data_source[self.y_column], color = 'r')
-        self.fig.set_xlabel("Price (In millions)", fontsize = 20)
-        self.fig.set_ylabel("Frequency", fontsize = 20)
+        self.fig.xlabel("Price (In millions)")
+        self.fig.ylabel("Frequency")
+        self.fig.xticks(fontsize = 20)
         self.show_plot()
     def scatter(self,var):
         self.var = var
