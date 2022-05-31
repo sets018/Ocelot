@@ -465,7 +465,7 @@ class plotting():
     def dist(self, y_column):
         self.y_column = y_column
         sns.set_style('whitegrid')
-        self.fig = plt.figure(figsize=(20,15))
+        self.fig = plt.figure(figsize=(24,20))
         sns.distplot(np.log(self.plot_data.data_source[self.y_column]), color = 'r')
         plt.xlabel('log(Sale Price)', fontsize = 16)
         plt.ylabel('Frequency', fontsize = 16)
