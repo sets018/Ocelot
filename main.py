@@ -471,7 +471,7 @@ class plotting():
         self.show_plot()
     def scatter(self,var):
         self.var = var
-        self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price (In Millions)', color='Borough')
+        self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
         st.plotly_chart(self.fig, use_container_width=False)
         #self.fig = plt.figure(figsize=(24,20))
         #sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
@@ -489,7 +489,7 @@ class plotting():
         st.pyplot(self.fig)
     def prepare_data(self):
         self.plot_data.data_source = self.plot_data.data_source[self.plot_data.data_source.Price < 500000000]
-        self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price (In Millions)'] /= 1000000
+        self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 1000000
         
 class oh_encoder(OneHotEncoder):
     def __init__(self, data):
@@ -745,7 +745,7 @@ with st.sidebar:
         #num_input.append(usr_input_num.user_input)
     
 price_plots = plotting(df)
-price_plots.dist("Price (In Millions)")
+price_plots.dist("Price")
 price_plots.scatter('Area')
 price_plots.corr()
 got_model = 0
