@@ -97,7 +97,8 @@ class df_data_source():
     def get_ds_columns(self):
         self.list_w_columns = list(self.data_source)
         return self.list_w_columns  
-
+    def normalize_data(self):
+        self.data_source.loc[self.data_source.Price > 1000000, 'Price'] /= 1000000
 class borough_classifier():
     def make_column_1stone(self):
         self.sectors_column = self.data.data_source.pop('Borough')
@@ -695,6 +696,7 @@ class user_input():
 df = df_data_source(
     'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_final.csv', 'url',
     0.9, 0.1)
+df.normalize_data()
 sectors = borough_classifier(df)
 sectors.get_sectors()
     
@@ -764,4 +766,4 @@ if st.button('Make Prediction'):
         got_model = 1
     prediction = fitted_model.get_predictions(pred_data.data_source)
     est_price = prediction[0]
-    st.write("Estimated price : ", int(est_price))
+    st.write("Estimated price : ", int(int(est_price)*1000000))
