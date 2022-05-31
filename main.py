@@ -483,6 +483,7 @@ class plotting():
         st.pyplot(self.fig)
     def prepare_data(self):
         #self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 100000000
+        pass
 class oh_encoder(OneHotEncoder):
     def __init__(self, data):
         super(OneHotEncoder, self).__init__()
