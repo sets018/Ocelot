@@ -472,7 +472,7 @@ class plotting():
         plt.title('Sale Price Distribution', fontsize = 22)
         self.show_plot()
     def scatter(self,var):
-        #self.var = var
+        self.var = var
         #self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
         #st.plotly_chart(self.fig, use_container_width=True)
         self.fig = sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
