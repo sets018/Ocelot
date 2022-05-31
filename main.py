@@ -468,11 +468,13 @@ class plotting():
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(24,20))
         sns.distplot(self.plot_data.data_source[self.y_column], color = 'r')
+        self.fig.set_xlabel("Price (In millions)", fontsize = 20)
+        self.fig.set_ylabel("Frequency", fontsize = 20)
         self.show_plot()
     def scatter(self,var):
         self.var = var
         self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
-        st.plotly_chart(self.fig, use_container_width=True)
+        st.plotly_chart(self.fig, use_container_width=False)
         #self.fig = plt.figure(figsize=(24,20))
         #sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
         #plt.title('Area / Sale Price', fontsize = 16)
