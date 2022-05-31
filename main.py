@@ -472,9 +472,16 @@ class plotting():
         plt.title('Sale Price Distribution', fontsize = 22)
         self.show_plot()
     def scatter(self,var):
-        self.var = var
-        self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
-        st.plotly_chart(self.fig, use_container_width=True)
+        #self.var = var
+        #self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
+        #st.plotly_chart(self.fig, use_container_width=True)
+        self.fig = sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
+        plt.title('{} / Sale Price'.format(self.var), fontsize = 16)
+        plt.xlabel('{}'.format(i[0]), fontsize = 14)
+        plt.ylabel('Sale Price', fontsize = 14)
+        plt.xticks(fontsize = 12)
+        plt.yticks(fontsize = 12)
+        self.show_plot()
     def corr(self):
         self.fig = plt.figure(figsize=(15, 15))
         sns.heatmap(self.plot_data.data_source.corr(), annot = True, cmap = 'magma')
@@ -482,8 +489,8 @@ class plotting():
     def show_plot(self):
         st.pyplot(self.fig)
     def prepare_data(self):
-        #self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 100000000
-        pass
+        self.plot_data.data_source.loc[self.plot_data.data_source.Price > 1000000, 'Price'] /= 100000000
+        
 class oh_encoder(OneHotEncoder):
     def __init__(self, data):
         super(OneHotEncoder, self).__init__()
