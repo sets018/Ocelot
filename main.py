@@ -15,7 +15,6 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.model_selection import cross_val_predict
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import GradientBoostingRegressor
-import xgboost as xgb
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
@@ -23,6 +22,7 @@ import pickle
 import sklearn
 from plotly.tools import FigureFactory as ff
 import plotly.express as px
+from PIL import Image
 
 # This class contains the data (a pandas df) as an attribute
 class df_data_source():
@@ -707,8 +707,10 @@ st.set_page_config(
 )
 
 st.title('Ocelot')
+logo = Image.open('Ocelot_logo.jpeg')
+st.image(logo)
 st.subheader('House price predictions from a machine learning model')
-st.subheader('Estimate the price of real estate on Barranquilla, Colombia')
+st.subheader('Estimate the price of real estate in Barranquilla, Colombia')
 st.write("""## How it works""")
 st.write("Get your estimation by using the button at the top left side of the screen to enter the data of the property (Area,Neighborhood,Bedrooms, etc) . This will give you a 'predicted sale price' based on your selections.")
 
