@@ -707,7 +707,7 @@ st.set_page_config(
 )
 
 st.title('Ocelot')
-logo = Image.open('Ocelot_logo.jpeg')
+logo = Image.open('Ocelot_logo.png')
 st.image(logo)
 st.subheader('Estimate the price of real estate in Barranquilla, Colombia')
 st.write('House price predictions from a machine learning model')
