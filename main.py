@@ -731,6 +731,7 @@ num_input = []
 input_columns_cat = ['Borough','neighborhood','condition','estrato','property_type']
 input_columns_num = ['Area','bedrooms','bathrooms','garages']
 
+plot_columns_num = ['Price','Area','bedrooms','bathrooms','garages']
 with st.sidebar:
     for column in input_columns_cat:
         if (column == 'Borough'):
@@ -745,23 +746,23 @@ with st.sidebar:
         usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
         #num_input.append(usr_input_num.user_input)
 price_plots = plotting(df)
-if st.checkbox('Show price distribution plot'):
+if st.checkbox('Show variable distribution plot'):
     num_plot_input = st.radio(
                 'Numeric variable',
-                input_columns_num)
-    if st.button('Make plot'):
-        price_plots.dist(num_plot_input)
-if st.checkbox('Show scatter plot'):
+                plot_columns_num)
+    if st.button('Make distribution plot'):
+        price_plots.dist(plot_columns_num)
+if st.checkbox('Show price scatter plot'):
    num_plot_input = st.radio(
                 'Numeric variable',
                 input_columns_num)
    cat_plot_input = st.radio(
                 'Categorical variable',
                 input_columns_cat)
-   if st.button('Make plot'):
+   if st.button('Make scatter plot'):
         price_plots.scatter(num_plot_input,cat_plot_input)
 if st.checkbox('Show data correlation'):
-    if st.button('Make plot'):
+    if st.button('Make correlation plot'):
         price_plots.corr()
 
 if st.button('Make Prediction'):
