@@ -751,7 +751,7 @@ if st.checkbox('Show variable distribution plot'):
                 'Numeric variable',
                 plot_columns_num)
     if st.button('Make distribution plot'):
-        price_plots.dist(plot_columns_num)
+        price_plots.dist(num_plot_input)
 if st.checkbox('Show price scatter plot'):
    num_plot_input = st.radio(
                 'Numeric variable',
