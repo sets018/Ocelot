@@ -469,9 +469,10 @@ class plotting():
         self.fig = plt.figure(figsize=(24,20))
         sns.distplot(self.plot_data.data_source[self.y_column], color = 'r')
         self.show_plot()
-    def scatter(self,var):
+    def scatter(self,var,cat_var):
         self.var = var
-        self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color='Borough')
+        self.cat_var = cat_var
+        self.fig = px.scatter(self.plot_data.data_source,x=self.var, y='Price', color=self.cat_var)
         st.plotly_chart(self.fig, use_container_width=False)
         #self.fig = plt.figure(figsize=(24,20))
         #sns.scatterplot(self.var, self.plot_data.data_source["Price"], data = self.plot_data.data_source, color = 'orange', edgecolor = 'b', s = 150)
@@ -692,7 +693,7 @@ class user_input():
         elif (self.type_data == 'list'):
             self.user_input = st.slider(self.var, 0, max(self.data), 1)
         st.write(self.var,": ",self.user_input)
-
+        
 df = df_data_source(
     'https://raw.githubusercontent.com/sets018/Ocelot/main/data_extraction/df_posts_housing_final.csv', 'url',
     0.9, 0.1)
@@ -743,12 +744,24 @@ with st.sidebar:
     for column in input_columns_num:
         usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
         #num_input.append(usr_input_num.user_input)
-    
-price_plots = plotting(df)
-price_plots.dist("Price")
-price_plots.scatter('Area')
-price_plots.corr()
-got_model = 0
+
+if st.button('Show price distribution plot'):
+    price_plots = plotting(df)
+    num_plot_input = st.radio(
+                'Numeric variable',
+                input_columns_num)
+    price_plots.dist(num_plot_input)
+if st.button('Show price distribution plot'):
+   price_plots = plotting(df)
+   num_plot_input = st.radio(
+                'Numeric variable',
+                input_columns_num)
+   cat_plot_input = st.radio(
+                'Categorical variable',
+                input_columns_cat)
+   price_plots.scatter(num_plot_input,cat_plot_input)
+if st.button('Show data correlation'):
+    price_plots.corr()
 
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
