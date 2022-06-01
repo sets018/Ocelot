@@ -754,7 +754,8 @@ if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
     encoder = oh_encoder(df.data_source)
     df_encoded = df_data_source(encoder.encode(), 'pass', 0.9, 0.1)
-    st.write("Raw_Pred_data : ", pred_data.data_source)
+    st.subheader('Entered data')
+    st.write(pred_data.data_source)
     pred_data_encoder = oh_encoder(pred_data.data_source)
     pred_data_encoded = pred_data_encoder.encode()
     columns_encoded = df_encoded.get_ds_columns()
@@ -774,4 +775,5 @@ if st.button('Make Prediction'):
         got_model = 1
     prediction = fitted_model.get_predictions(pred_data.data_source)
     est_price = prediction[0]
+    st.subheader('Prediction')
     st.write("Estimated price : ", int(int(est_price)*1000000))
