@@ -744,24 +744,25 @@ with st.sidebar:
     for column in input_columns_num:
         usr_input_num = user_input(column, 'slider', df, 'dataframe', num_input)
         #num_input.append(usr_input_num.user_input)
-
-if st.button('Show price distribution plot'):
-    price_plots = plotting(df)
+price_plots = plotting(df)
+if st.checkbox('Show price distribution plot'):
     num_plot_input = st.radio(
                 'Numeric variable',
                 input_columns_num)
-    price_plots.dist(num_plot_input)
-if st.button('Show scatter plot'):
-   price_plots = plotting(df)
+    if st.button('Make plot'):
+        price_plots.dist(num_plot_input)
+if st.checkbox('Show scatter plot'):
    num_plot_input = st.radio(
                 'Numeric variable',
                 input_columns_num)
    cat_plot_input = st.radio(
                 'Categorical variable',
                 input_columns_cat)
-   price_plots.scatter(num_plot_input,cat_plot_input)
-if st.button('Show data correlation'):
-    price_plots.corr()
+   if st.button('Make plot'):
+        price_plots.scatter(num_plot_input,cat_plot_input)
+if st.checkbox('Show data correlation'):
+    if st.button('Make plot'):
+        price_plots.corr()
 
 if st.button('Make Prediction'):
     pred_data = prediction_data(cat_input, num_input, input_columns_cat, input_columns_num)
