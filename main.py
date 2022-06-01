@@ -467,7 +467,7 @@ class plotting():
         self.y_column = y_column
         sns.set_style('whitegrid')
         self.fig = plt.figure(figsize=(24,20))
-        sns.distplot(self.plot_data.data_source[self.y_column], color = 'r')
+        sns.distplot(self.plot_data.data_source[self.y_column], color = 'y')
         self.show_plot()
     def scatter(self,var,cat_var):
         self.var = var
