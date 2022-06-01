@@ -751,7 +751,7 @@ if st.button('Show price distribution plot'):
                 'Numeric variable',
                 input_columns_num)
     price_plots.dist(num_plot_input)
-if st.button('Show price distribution plot'):
+if st.button('Show scatter plot'):
    price_plots = plotting(df)
    num_plot_input = st.radio(
                 'Numeric variable',
