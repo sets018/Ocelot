@@ -709,6 +709,7 @@ st.set_page_config(
 
 got_model = 0
 st.title('Ocelot')
+st.write('By: Set Salas & Luis Cuellar')
 st.write("[![Star](https://img.shields.io/github/stars/sets018/Ocelot.svg?logo=github&style=social)](https://gitHub.com/sets018/Ocelot)")
 logo = Image.open('Ocelot_logo.png')
 st.image(logo)
